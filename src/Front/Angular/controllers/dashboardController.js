@@ -78,11 +78,19 @@ ShopFunnelsApp.controller('DashboardController', ['$scope', '$controller', 'NgTa
             });
 
             modal.result.then(function (response) {
+                $scope.refreshFunnelForms();
             });
         };
 
         $scope.refreshFunnelForms = function () {
-
+            DashboardService.getFunnelForms().then(function (response) {
+                if (response.success) {
+                    $scope.data.funnelForms = response.funnelForms;
+                    $scope.funnelFormTable.reload();
+                } else {
+                    toastr.error(response.errorMsg);
+                }
+            });
         };
 
         $scope.addFunnelForm = function () {
@@ -96,6 +104,7 @@ ShopFunnelsApp.controller('DashboardController', ['$scope', '$controller', 'NgTa
             });
 
             modal.result.then(function (response) {
+                $scope.refreshFunnelForms();
             });
         };
 

@@ -34,6 +34,7 @@ ShopFunnelsApp.controller('ManageProductsModalController', ['$scope', '$controll
             });
 
             modal.result.then(function (response) {
+                $scope.refreshProductTable();
             });
         };
 
@@ -49,7 +50,14 @@ ShopFunnelsApp.controller('ManageProductsModalController', ['$scope', '$controll
             });
 
             modal.result.then(function (response) {
+                if (response) {
+                    $scope.refreshProductTable();
+                }
             });
+        };
+
+        $scope.refreshProductTable = function () {
+
         };
 
         $scope.close = function() {
